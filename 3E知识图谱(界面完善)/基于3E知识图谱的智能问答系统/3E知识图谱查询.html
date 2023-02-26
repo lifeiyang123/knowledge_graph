@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>3E知识图谱关系图</title>
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/echarts.js"></script>
+</head>
+
+<body>
+<div id="main" style="width:1600px;height:800px"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var categories = [];
+    var a=['3E','3E分类','能源大体分类','能源具体分类','电力分类','环境大体分类','环境具体分类','经济大体分类','经济活动大体分类','经济活动具体分类','国民经济核算体系大体分类','国民经济核算体系具体分类']
+    for (var i = 0; i < 12; i++) {
+        categories[i] = {
+            name: a[i]
+        };
+    }
+    option = {
+        // 图的标题
+        title: {
+            text: '3E知识图谱关系图',
+            "textStyle": {
+            "fontSize": 20
+        },
+        },
+        // 提示框的配置
+        tooltip: {
+            formatter: function (x) {
+                return x.data.des;
+            }
+
+        },
+        // 工具箱
+        toolbox: {
+            // 显示工具箱
+            show: true,
+            feature: {
+                mark: {
+                    show: true
+                },
+                // 还原
+                restore: {
+                    show: true
+                },
+                // 保存为图片
+                saveAsImage: {
+                    show: true
+                }
+            }
+        },
+         legend: [{
+            // selectedMode: 'single',
+            //设置可以根据类别显示or隐藏节点
+             "textStyle": {
+            "fontSize": 10
+        },
+            selected:{'3E':false,'3E分类':false,'能源大体分类':false,'能源具体分类':false,'电力分类':false,'环境大体分类':false,'环境具体分类':false,'经济大体分类':false,'经济活动大体分类':false,'经济活动具体分类':false,'国民经济核算体系大体分类':false,'国民经济核算体系具体分类':false}
+<!--            data: categories.map(function (a) {-->
+<!--                return a.name;-->
+<!--            })-->
+
+        }],
+
+        series: [{
+            type: 'graph', // 类型:关系图
+            layout: 'force', //图的布局，类型为力导图
+            symbolSize: 40, // 调整节点的大小
+            roam: true, // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移,可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+            edgeSymbol: ['circle', 'arrow'],
+            edgeSymbolSize: [2, 20],
+            edgeLabel: {
+                normal: {
+                    textStyle: {
+                        fontSize: 20
+                    }
+                }
+            },
+            force: {
+                repulsion: 2500,
+                edgeLength: [10, 50]
+            },
+            draggable: true,
+            lineStyle: {
+                normal: {
+                    width: 2,
+                    color: '#4b565b',
+                }
+            },
+            edgeLabel: {
+                normal: {
+                    show: true,
+                    formatter: function (x) {
+                        return x.data.name;
+                    }
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    textStyle: {
+                    "fontSize": 18
+                    }
+                }
+            },
+
+            // 数据
+            data: [{
+                name: '3E',
+                des: '',
+                symbolSize: 100,
+                category: 0,
+            }, {
+                name: '能源',
+                des: '能源，是指能够提供能量的资源。这里的能量通常指热能、电能、光能、机械能、化学能等。可以为人类提供动能，机械能和能量的物质。',
+                symbolSize: 80,
+                category: 1,
+            }, {
+                name: '经济',
+                des: '经济，是指整个社会的物质资料的生产和再生产，指社会物质生产、流通、交换等活动。',
+                symbolSize: 80,
+                category: 1,
+            }, {
+                name: '环境',
+                des: '环境，是指影响人类生存和发展的各种天然的和经过人工改造的自然因素的总体'+'\n'+'包括大气、水、海洋、土地、矿藏、森林、草原、野生生物、自然遗迹、人文遗迹、自然保护区、风景名胜区、城市和乡村等。',
+                symbolSize: 80,
+                category: 1,
+            }, {
+                name: '一次能源',
+                des: '',
+                symbolSize: 60,
+                category: 2,
+            }, {
+                name: '二次能源',
+                des: '',
+                symbolSize: 60,
+                category: 2,
+            }, {
+                name: '煤炭',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '焦炭',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '原油',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '石油',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '汽油',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '煤油',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '柴油',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '燃料油',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '液化石油气',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '天然气',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '核能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '风能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '太阳能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '水能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '生物质能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '海洋能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '地热能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '潮汐能',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '电力',
+                des: '',
+                symbolSize: 50,
+                category: 3,
+            }, {
+                name: '火电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '核电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '风电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '水电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '太阳能发电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '生物质发电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '海洋能发电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '地热能发电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '潮汐能发电',
+                des: '',
+                symbolSize: 90,
+                category: 4,
+            }, {
+                name: '废气污染物',
+                des: '',
+                symbolSize: 60,
+                category: 5,
+            },{
+                name: '废水污染物',
+                des: '',
+                symbolSize: 60,
+                category: 5,
+            },{
+                name: '固体污染物',
+                des: '',
+                symbolSize: 60,
+                category: 5,
+            },{
+                name: '噪声污染',
+                des: '',
+                symbolSize: 60,
+                category: 5,
+            },{
+                name: '氮氧化物',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '颗粒物',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '二氧化硫',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '二氧化氮',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '可吸入颗粒物(PM10)',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '细颗粒物(PM2.5)',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '一氧化碳',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '臭氧',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '化学需氧量',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '氨氮化合物',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '氮',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '磷',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '石油类',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '挥发酚',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '铅',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '汞',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '镉',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '六价铬',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '铬',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '砷',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '一般工业固体废物',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '危险废物',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '生活垃圾',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '无害化处理厂',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '卫生填埋厂',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '焚烧厂',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '其他垃圾处理厂',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '道路交通噪声',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '区域环境噪声',
+                des: '',
+                symbolSize: 50,
+                category: 6,
+            },{
+                name: '经济活动',
+                des: '',
+                symbolSize: 60,
+                category: 7,
+            },{
+                name: '国民经济核算体系',
+                des: '',
+                symbolSize: 60,
+                category: 7,
+            },{
+                name: '生产环节',
+                des: '',
+                symbolSize: 50,
+                category: 8,
+            },{
+                name: '消费环节',
+                des: '',
+                symbolSize: 50,
+                category: 8,
+            },{
+                name: '交换环节',
+                des: '',
+                symbolSize: 50,
+                category: 8,
+            },{
+                name: '分配环节',
+                des: '',
+                symbolSize: 50,
+                category: 8,
+            },{
+                name: '农林牧渔业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '工业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '建筑业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '金融业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '批发和零售业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '交通运输仓储和邮政业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '房地产业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '住宿和餐饮业',
+                des: '',
+                symbolSize: 40,
+                category: 9,
+            },{
+                name: '经济循环账户',
+                des: '',
+                symbolSize: 50,
+                category: 10,
+            },{
+                name: '社会再生产核算表',
+                des: '',
+                symbolSize: 50,
+                category: 10,
+            },{
+                name: '国内生产总值',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '国内生产总值构成',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '国内生产总值指数',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '不变价国内生产总值',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '不变价国内生产总值指数',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '分行业增加值',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '三次产业和主要行业贡献率',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '三次产业和主要行业对国内生产总值的拉动',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '地区生产总值',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '地区生产总值指数',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '地区生产总值占比',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '支出法国内生产总值',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '生产总值',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '三大需求对国内生产总值的贡献率',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '货物与服务净出口',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '投入产出基本流量表',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '金融交易资金流量表',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },{
+                name: '非金融交易资金流量表',
+                des: '',
+                symbolSize: 40,
+                category: 11,
+            },],
+
+
+
+
+
+            links: [{
+                source: '3E',
+                target: '能源',
+                name: '分为',
+                des: ''
+            }, {
+                source: '3E',
+                target: '经济',
+                name: '分为',
+                des: ''
+            }, {
+                source: '3E',
+                target: '环境',
+                name: '分为',
+                des: ''
+            }, {
+                source: '能源',
+                target: '一次能源',
+                name: '大体分为',
+                des: ''
+            }, {
+                source: '能源',
+                target: '二次能源',
+                name: '大体分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '煤炭',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '原油',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '石油',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '天然气',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '核能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '风能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '太阳能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '水能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '生物质能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '海洋能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '地热能',
+                name: '分为',
+                des: ''
+            },{
+                source: '一次能源',
+                target: '潮汐能',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '煤油',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '焦炭',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '汽油',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '柴油',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '燃料油',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '液化石油气',
+                name: '分为',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '电力',
+                name: '分为',
+                des: ''
+            },{
+                source: '电力',
+                target: '火电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '核电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '风电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '水电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '太阳能发电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '生物质发电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '海洋能发电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '地热能发电',
+                name: '分成',
+                des: ''
+            },{
+                source: '电力',
+                target: '潮汐能发电',
+                name: '分成',
+                des: ''
+            },{
+                source: '环境',
+                target: '废气污染物',
+                name: '大体分为',
+                des: ''
+            },{
+                source: '环境',
+                target: '废水污染物',
+                name: '大体分为',
+                des: ''
+            },{
+                source: '环境',
+                target: '固体污染物',
+                name: '大体分为',
+                des: ''
+            },{
+                source: '环境',
+                target: '噪声污染',
+                name: '大体分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '氮氧化物',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '颗粒物',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '二氧化硫',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '二氧化氮',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '可吸入颗粒物(PM10)',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '细颗粒物(PM2.5)',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '一氧化碳',
+                name: '分为',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '臭氧',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '化学需氧量',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '氨氮化合物',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '氮',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '磷',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '石油类',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '挥发酚',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '铅',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '汞',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '镉',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '六价铬',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '铬',
+                name: '分为',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '砷',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '一般工业固体废物',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '危险废物',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '生活垃圾',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '无害化处理厂',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '卫生填埋厂',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '焚烧厂',
+                name: '分为',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '其他垃圾处理厂',
+                name: '分为',
+                des: ''
+            },{
+                source: '噪声污染',
+                target: '道路交通噪声',
+                name: '分为',
+                des: ''
+            },{
+                source: '噪声污染',
+                target: '区域环境噪声',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济',
+                target: '经济活动',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济',
+                target: '国民经济核算体系',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济活动',
+                target: '生产环节',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济活动',
+                target: '消费环节',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济活动',
+                target: '交换环节',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济活动',
+                target: '分配环节',
+                name: '分为',
+                des: ''
+            },{
+                source: '生产环节',
+                target: '工业',
+                name: '分为',
+                des: ''
+            },{
+                source: '生产环节',
+                target: '农林牧渔业',
+                name: '分为',
+                des: ''
+            },{
+                source: '生产环节',
+                target: '建筑业',
+                name: '分为',
+                des: ''
+            },{
+                source: '分配环节',
+                target: '金融业',
+                name: '分为',
+                des: ''
+            },{
+                source: '交换环节',
+                target: '批发和零售业',
+                name: '分为',
+                des: ''
+            },{
+                source: '交换环节',
+                target: '交通运输仓储和邮政业',
+                name: '分为',
+                des: ''
+            },{
+                source: '交换环节',
+                target: '房地产业',
+                name: '分为',
+                des: ''
+            },{
+                source: '消费环节',
+                target: '住宿和餐饮业',
+                name: '分为',
+                des: ''
+            },{
+                source: '国民经济核算体系',
+                target: '经济循环账户',
+                name: '分为',
+                des: ''
+            },{
+                source: '国民经济核算体系',
+                target: '社会再生产核算表',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '国内生产总值',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '国内生产总值构成',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '国内生产总值指数',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '不变价国内生产总值',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '不变价国内生产总值指数',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '分行业增加值',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '三次产业和主要行业贡献率',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '三次产业和主要行业对国内生产总值的拉动',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '地区生产总值',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '地区生产总值指数',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '地区生产总值占比',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '支出法国内生产总值',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '生产总值',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '三大需求对国内生产总值的贡献率',
+                name: '分为',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '货物与服务净出口',
+                name: '分为',
+                des: ''
+            },{
+                source: '社会再生产核算表',
+                target: '投入产出基本流量表',
+                name: '分为',
+                des: ''
+            },{
+                source: '社会再生产核算表',
+                target: '非金融交易资金流量表',
+                name: '分为',
+                des: ''
+            },{
+                source: '社会再生产核算表',
+                target: '金融交易资金流量表',
+                name: '分为',
+                des: ''
+            },
+
+
+
+
+
+            {
+                source: '一次能源',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '二次能源',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '煤炭',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '焦炭',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '原油',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '石油',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '汽油',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '煤油',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '柴油',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '燃料油',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '液化石油气',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '天然气',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '核能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '风能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '太阳能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '水能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '生物质能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '海洋能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '地热能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '潮汐能',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '电力',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '火电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '核电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '风电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '水电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '太阳能发电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '生物质发电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '海洋能发电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{  source: '地热能发电',
+                 target: '3E',
+                 name: '属于',
+                 des: ''
+            },{
+                source: '潮汐能发电',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },
+               {
+                source: '氮氧化物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '颗粒物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '二氧化硫',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '二氧化氮',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '可吸入颗粒物(PM10)',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '细颗粒物(PM2.5)',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '一氧化碳',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '臭氧',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '化学需氧量',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '氨氮化合物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '氮',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '磷',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '石油类',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '挥发酚',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '铅',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '汞',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '镉',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '六价铬',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '铬',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '砷',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '一般工业固体废物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '危险废物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '生活垃圾',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '无害化处理厂',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '卫生填埋厂',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '焚烧厂',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '其他垃圾处理厂',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '道路交通噪声',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '区域环境噪声',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '废气污染物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '废水污染物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '固体污染物',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '噪声污染',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '煤炭',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '焦炭',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '原油',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '石油',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '汽油',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '煤油',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '柴油',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '燃料油',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '液化石油气',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '天然气',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '核能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '风能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '太阳能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '水能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '生物质能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '海洋能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '地热能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '潮汐能',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '电力',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '火电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '核电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '风电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '水电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '太阳能发电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '生物质发电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '海洋能发电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{  source: '地热能发电',
+                 target: '能源',
+                 name: '属于',
+                 des: ''
+            },{
+                source: '潮汐能发电',
+                target: '能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '火电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '核电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '风电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '水电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '太阳能发电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '生物质发电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{
+                source: '海洋能发电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },{  source: '地热能发电',
+                 target: '二次能源',
+                 name: '属于',
+                 des: ''
+            },{
+                source: '潮汐能发电',
+                target: '二次能源',
+                name: '属于',
+                des: ''
+            },
+               {
+                source: '氮氧化物',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '颗粒物',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '二氧化硫',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '二氧化氮',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '可吸入颗粒物(PM10)',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '细颗粒物(PM2.5)',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '一氧化碳',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '臭氧',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '化学需氧量',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '氨氮化合物',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '氮',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '磷',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '石油类',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '挥发酚',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '铅',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '汞',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '镉',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '六价铬',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '铬',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '砷',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '一般工业固体废物',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '危险废物',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '生活垃圾',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '无害化处理厂',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '卫生填埋厂',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '焚烧厂',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '其他垃圾处理厂',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '道路交通噪声',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '区域环境噪声',
+                target: '环境',
+                name: '属于',
+                des: ''
+            },{
+                source: '经济活动',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '国民经济核算体系',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '生产环节',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '消费环节',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '交换环节',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '分配环节',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '农林牧渔业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '工业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '建筑业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '金融业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '批发和零售业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '交通运输仓储和邮政业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '房地产业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '住宿和餐饮业',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '社会再生产核算表',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值构成',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值指数',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '不变价国内生产总值',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '不变价国内生产总值指数',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '分行业增加值',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '三次产业和主要行业贡献率',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '三次产业和主要行业对国内生产总值的拉动',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值指数',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值占比',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '支出法国内生产总值',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '生产总值',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '三大需求对国内生产总值的贡献率',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '货物与服务净出口',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '投入产出基本流量表',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '金融交易资金流量表',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },{
+                source: '非金融交易资金流量表',
+                target: '3E',
+                name: '属于',
+                des: ''
+            },
+
+            {
+                source: '生产环节',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '消费环节',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '交换环节',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '分配环节',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '农林牧渔业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '工业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '建筑业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '金融业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '批发和零售业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '交通运输仓储和邮政业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '房地产业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '住宿和餐饮业',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '经济循环账户',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '社会再生产核算表',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值构成',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值指数',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '不变价国内生产总值',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '不变价国内生产总值指数',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '分行业增加值',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '三次产业和主要行业贡献率',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '三次产业和主要行业对国内生产总值的拉动',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值指数',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值占比',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '支出法国内生产总值',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '生产总值',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '三大需求对国内生产总值的贡献率',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '货物与服务净出口',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '投入产出基本流量表',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '金融交易资金流量表',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '非金融交易资金流量表',
+                target: '经济',
+                name: '属于',
+                des: ''
+            },{
+                source: '农林牧渔业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '工业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '建筑业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '金融业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '批发和零售业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '交通运输仓储和邮政业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '房地产业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '住宿和餐饮业',
+                target: '经济活动',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值构成',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '国内生产总值指数',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '不变价国内生产总值',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '不变价国内生产总值指数',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '分行业增加值',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '三次产业和主要行业贡献率',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '三次产业和主要行业对国内生产总值的拉动',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值指数',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '地区生产总值占比',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '支出法国内生产总值',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '生产总值',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '三大需求对国内生产总值的贡献率',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '货物与服务净出口',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '投入产出基本流量表',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '金融交易资金流量表',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },{
+                source: '非金融交易资金流量表',
+                target: '国民经济核算体系',
+                name: '属于',
+                des: ''
+            },
+
+            {
+                source: '生产环节',
+                target: '消费环节',
+                name: '基础',
+                des: ''
+            },{
+                source: '生产环节',
+                target: '分配环节',
+                name: '基础',
+                des: ''
+            },{
+                source: '生产环节',
+                target: '交换环节',
+                name: '基础',
+                des: ''
+            },
+
+
+            ],
+            categories: categories,
+        }]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>
